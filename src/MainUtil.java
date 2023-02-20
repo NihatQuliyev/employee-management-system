@@ -1,10 +1,6 @@
-package util;
-
-import exception.InvalidOption;
 import service.impl.ManagementService;
-
 public class MainUtil {
-    public static void main(String[] args) throws InvalidOption {
+    public static void main(String[] args)   {
         ManagementService managementService = new ManagementService();
         managementService.management();
     }

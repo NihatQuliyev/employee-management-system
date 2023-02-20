@@ -1,0 +1,8 @@
+package exception;
+
+public enum EnumException {
+    EMPLOYEE_NOT_FOUND_EXCEPTION,
+    EMPLOYEE_NOT_FOUND_ID,
+    EMPLOYEE_NOT_FOUND_PARAMETER,
+    INVALID_OPTION
+}

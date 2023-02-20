@@ -1,12 +1,9 @@
 package service;
-
-
 import exception.EmployeeNotFoundException;
 import exception.EmployeeNotFoundId;
 import exception.EmployeeNotFoundParameter;
-
 public interface EmployeeService {
-    boolean register();
+    boolean register() throws Exception;
     void show() throws EmployeeNotFoundException;
     boolean update() throws EmployeeNotFoundException , EmployeeNotFoundId, EmployeeNotFoundParameter;
     boolean delete() throws EmployeeNotFoundException,EmployeeNotFoundId;

@@ -2,6 +2,6 @@ package exception;
 
 public class EmployeeNotFoundId extends Exception{
     public EmployeeNotFoundId(){
-        super(ExceptionResponse.Employee_Not_Found_Id);
+        super(EnumException.EMPLOYEE_NOT_FOUND_ID.name());
     }
 }

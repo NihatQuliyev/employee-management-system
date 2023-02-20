@@ -2,7 +2,7 @@ package exception;
 
 public class InvalidOption extends Exception{
     public InvalidOption(){
-        super(ExceptionResponse.Invalid_Option);
+        super(EnumException.INVALID_OPTION.name());
     }
 
 }

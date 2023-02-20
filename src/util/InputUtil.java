@@ -1,8 +1,5 @@
 package util;
-
-import java.security.PublicKey;
 import java.util.Scanner;
-
 public class InputUtil {
     public static String stringInput(String title){
         Scanner scanner = new Scanner(System.in);
@@ -19,5 +16,4 @@ public class InputUtil {
         System.out.print(title);
         return scanner.nextShort();
     }
-
 }

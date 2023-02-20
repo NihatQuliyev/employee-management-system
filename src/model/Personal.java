@@ -1,12 +1,9 @@
 package model;
-
 import java.time.LocalDate;
-
 public class Personal {
     private String name;
     private String surname;
     private LocalDate birthday;
-
 
     public Personal(String name, String surname, LocalDate birthday) {
         this.name = name;
