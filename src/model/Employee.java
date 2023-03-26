@@ -1,8 +1,6 @@
 package model;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 public class Employee extends Personal{
     private long id;
     private String department;

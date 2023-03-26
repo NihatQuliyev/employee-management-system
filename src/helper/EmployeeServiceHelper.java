@@ -16,15 +16,13 @@ public class EmployeeServiceHelper {
             long salary = longInput("Enter the salary: ");
             LocalDateTime createUpdate = nowDate();
             LocalDateTime updateDate = null;
-            Employee employee = new Employee(++id, name, surname, birthday, department, position, salary,createUpdate,updateDate);
-            return employee;
+            return new Employee(++id, name, surname, birthday, department, position, salary,createUpdate,updateDate);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
     public static LocalDate birthdayHelperService() {
-
         String str1 = stringInput("Enter the Local Date(day-month-years) : ");
         String[] str2 = str1.split("-");
         int years = Integer.parseInt(str2[0]);

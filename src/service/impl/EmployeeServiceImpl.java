@@ -2,11 +2,13 @@ package service.impl;
 import exception.*;
 import globalData.GlobalData;
 import model.Employee;
+import static enums.EnumStatus.*;
 import static util.InputUtil.*;
 import static helper.EmployeeServiceHelper.*;
-public class EmployeeService implements service.EmployeeService {
+public class EmployeeServiceImpl implements service.EmployeeService {
     @Override
-    public boolean register() throws Exception {
+    public boolean register(){
+        boolean isTrue = false;
         short count = shortInput("How many Employee register? : ");
         if(GlobalData.employees == null) {
             GlobalData.employees = new Employee[count];
@@ -16,6 +18,7 @@ public class EmployeeService implements service.EmployeeService {
                 Employee employee = fillEmployee();
                 if (employee != null){
                     GlobalData.employees[i] = employee;
+                    isTrue = true;
                 } else {
                     Employee[] tempEmployee = GlobalData.employees;
                     GlobalData.employees = new Employee[tempEmployee.length - (count-i)];
@@ -23,14 +26,10 @@ public class EmployeeService implements service.EmployeeService {
                     for (Employee newEmployee: tempEmployee) {
                         GlobalData.employees[n] = newEmployee;
                     n++;
-
                     }
                     throw new ArrayIndexOutOfBoundsException();
                 }
-
             }
-            System.out.println("--------------");
-            System.out.println("register successfully");
         }
         else {
             Employee[] tempEmployee = GlobalData.employees;
@@ -44,6 +43,7 @@ public class EmployeeService implements service.EmployeeService {
                     Employee employee1 = fillEmployee();
                     if (employee1 != null) {
                         GlobalData.employees[i] = employee1;
+                        isTrue = true;
                     } else {
                         Employee[] newEmployee = GlobalData.employees;
                         GlobalData.employees = new Employee[newEmployee.length - (GlobalData.employees.length - i)];
@@ -56,8 +56,10 @@ public class EmployeeService implements service.EmployeeService {
                     }
                 }
             }
+        }
+        if (isTrue){
             System.out.println("--------------");
-            System.out.println("register successfully");
+            System.out.println(REGISTER_SUCCESSFULLY.name());
         }
         return false;
     }
@@ -90,36 +92,36 @@ public class EmployeeService implements service.EmployeeService {
                     if (GlobalData.employees[i].getId() == id) {
                         String parameters = stringInput("Enter the parameter: ");
                         String[] strings = parameters.toLowerCase().split(",");
-                        for (int j = 0; j < strings.length; j++) {
-                            if (strings[j].equals("name")) {
+                        for (String string : strings) {
+                            if (string.equals("name")) {
                                 GlobalData.employees[i].setName(stringInput("Enter the update name: "));
                                 isUpdated = true;
                             }
-                            if (strings[j].contains("surname") && !strings[j].equals("name")) {
+                            if (string.contains("surname") && !string.equals("name")) {
                                 GlobalData.employees[i].setSurname(stringInput("Enter the update surname: "));
                                 isUpdated = true;
                             }
-                            if (strings[j].contains("birthday")) {
+                            if (string.contains("birthday")) {
                                 GlobalData.employees[i].setBirthday(birthdayHelperService());
                                 isUpdated = true;
                             }
-                            if (strings[j].contains("department")) {
+                            if (string.contains("department")) {
                                 GlobalData.employees[i].setDepartment(stringInput("Enter the update department: "));
-                                 isUpdated = true;
+                                isUpdated = true;
                             }
-                            if (strings[j].contains("position")) {
+                            if (string.contains("position")) {
                                 GlobalData.employees[i].setPosition(stringInput("Enter the update position: "));
-                                 isUpdated = true;
+                                isUpdated = true;
                             }
-                            if (strings[j].contains("salary")) {
+                            if (string.contains("salary")) {
                                 GlobalData.employees[i].setSalary(shortInput("Enter the update salary: "));
-                                 isUpdated = true;
+                                isUpdated = true;
                             }
-
-                            if (isUpdated ==true){
+                            if (isUpdated) {
                                 GlobalData.employees[i].setUpdateDate(nowDate());
+                                System.out.println(UPDATE_SUCCESSFULLY.name());
                             }
-                            if (isUpdated==false){
+                            if (!isUpdated) {
                                 throw new EmployeeNotFoundParameter();
                             }
                         }
@@ -131,6 +133,7 @@ public class EmployeeService implements service.EmployeeService {
     }
     @Override
     public boolean delete() throws EmployeeNotFoundException , EmployeeNotFoundId {
+        boolean isTrue = false;
         if (GlobalData.employees == null  || GlobalData.employees.length == 0){
             throw new  EmployeeNotFoundException();
         }
@@ -143,6 +146,7 @@ public class EmployeeService implements service.EmployeeService {
                 if (employee.getId() == id) {
                     Employee[] tempEmployee = GlobalData.employees;
                     GlobalData.employees = new Employee[tempEmployee.length - 1];
+                    isTrue = true;
                     int k = 0;
                     for (Employee newEmployee : tempEmployee) {
                         if (newEmployee.getId() == id)
@@ -152,6 +156,9 @@ public class EmployeeService implements service.EmployeeService {
                     }
                 }
             }
+        }
+        if (isTrue){
+            System.out.println(DELETE_SUCCESSFULLY.name());
         }
         return false;
     }
@@ -170,7 +177,7 @@ public class EmployeeService implements service.EmployeeService {
                     isTrue = true;
                 }
             }
-            if (isTrue == false){
+            if (!isTrue){
                 throw new  EmployeeNotFoundException();
             }
         }

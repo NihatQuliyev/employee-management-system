@@ -1,7 +1,7 @@
-import service.impl.ManagementService;
+import service.impl.ManagementServiceImpl;
 public class MainUtil {
     public static void main(String[] args)   {
-        ManagementService managementService = new ManagementService();
+        ManagementServiceImpl managementService = new ManagementServiceImpl();
         managementService.management();
     }
 }

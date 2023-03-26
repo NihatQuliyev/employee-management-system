@@ -1,4 +1,4 @@
-package exception;
+package enums;
 
 public enum EnumException {
     EMPLOYEE_NOT_FOUND_EXCEPTION,
